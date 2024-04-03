@@ -5,22 +5,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
 public class Article implements Serializable{
 	private static final long serialVersionUID = 1L;
-	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	private String brand;
 	private String description;
 	private double price;
 	
-	//constructeur vide
-	public Article(String description, String brand) {
-		this.brand = brand;
+	@ManyToOne
+	@JoinColumn(name="categoryId", nullable=false)
+	private Category category;
+	
+	//constructeurs
+	public Article() {}
+	
+	public Article(String description, String brand, double price, Category category) {
 		this.description = description;
+		this.brand = brand;
+		this.price = price;
+		this.category = category;
 	}
 	
 	public Article(Long id, String brand, String description, double price) {

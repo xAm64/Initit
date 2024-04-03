@@ -24,13 +24,20 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		for (Article article : articleRepository.findByBrand("Samsoung")) {
+		Category smartphone = categoryRepository.save(new Category("smartphone"));
+		Category tablet = categoryRepository.save(new Category("tablet"));
+		Category pc = categoryRepository.save(new Category("pc"));
+		
+		articleRepository.save(new Article("S10", "Samsoung", 549, smartphone));
+		articleRepository.save(new Article("S9", "Samsoung", 379, smartphone));
+		articleRepository.save(new Article("MI10", "Xiaomi", 149, smartphone));
+		articleRepository.save(new Article("GalaxyTab", "Samsoung", 479, tablet));
+		articleRepository.save(new Article("Ipad", "Apple", 995, tablet));
+		articleRepository.save(new Article("R510", "Asus", 1190, pc));
+		
+		/*for (Article article : articleRepository.findByBrand("Samsoung")) {
 			System.out.println(article);
-		}
-		/*
-		categoryRepository.save(new Category("Smartphone"));
-		articleRepository.save(new Article("S9", "Samsoung"));
-		*/
+		}*/
 	}
 
 }
