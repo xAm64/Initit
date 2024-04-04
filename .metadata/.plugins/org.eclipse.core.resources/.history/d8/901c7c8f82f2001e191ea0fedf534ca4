@@ -1,0 +1,18 @@
+package fr.fms.dao;
+
+import fr.fms.entities.Article;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
+
+public interface ArticleRepository extends JpaRepository<Article,Long>{
+	
+	public List<Article> findByBrand(String brand);
+	public List<Article> findByDescription(String description);
+	public List<Article> findAllByOrderByDescriptionAsc();
+	public List<Article> findAllByOrderByIdAsc();
+	@Modifying
+	@Query("update Article set description = :description, brand = :brand, price = :price, category.id = :categoryId where id = :id")
+	void updateById(@Param("description") String description, @Param("brand") String brand, @Param("price") double price);
+}
