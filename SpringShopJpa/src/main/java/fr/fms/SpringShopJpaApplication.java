@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.domain.Sort;
 
 import fr.fms.dao.ArticleRepository;
 import fr.fms.dao.CategoryRepository;
@@ -36,15 +37,15 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 		articleRepository.save(new Article("Ipad", "Apple", 995, tablet));
 		articleRepository.save(new Article("R510", "Asus", 1190, pc));
 		
-		//Pour les exercices j'ai mis l'énoncé pour pas les confondres dans la console
 		//exercice 1.2
+		/*
 		System.out.println("Afficvher tous les articles en base");
 		for (Article article: articleRepository.findAllByOrderByIdAsc()) {			
 			System.out.println(article);
 		}
 		System.out.println("Afficher un article en base");
 		System.out.println(articleRepository.findById((long) 2));
-		
+		*/
 	}
 	
 	//exercice 1.3 
@@ -76,7 +77,18 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 		String description = scn.nextLine();
 		String brand = scn.nextLine();
 		Double price = scn.nextDouble();
-		articleRepository.updateById(id, description, brand, price);
+		articleRepository.updateArticle(id, description, brand, price);
+	}
+	
+	public void articlesByCategoryAsc() {
+		
+	}
+	
+	public void articlesByCategory() {
+		System.out.println(articleRepository.findAll(Sort.by("category_id")));
+	}
+	public void articlesByCategoryDesc() {
+		System.out.println(articleRepository.findAll(Sort.Direction.DESC, "category_id"));
 	}
 	
 }

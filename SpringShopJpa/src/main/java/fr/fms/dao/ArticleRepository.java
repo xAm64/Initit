@@ -4,6 +4,7 @@ import fr.fms.entities.Article;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 
 public interface ArticleRepository extends JpaRepository<Article,Long>{
@@ -12,7 +13,10 @@ public interface ArticleRepository extends JpaRepository<Article,Long>{
 	public List<Article> findByDescription(String description);
 	public List<Article> findAllByOrderByDescriptionAsc();
 	public List<Article> findAllByOrderByIdAsc();
+	
 	@Modifying
 	@Query(value = "update article a SET a.description = ?, a.brand = ?, a.price = ? WHERE u.id = ?", nativeQuery = true)
-	void updateById(String description, String brand, double price, long id);
+	void updateArticle(Long id, String brand, String brand2, Double price);
+	
+	public List<Article> findAll(Sort sort);
 }
