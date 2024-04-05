@@ -19,4 +19,5 @@ public interface ArticleRepository extends JpaRepository<Article,Long>{
 	void updateArticle(Long id, String brand, String brand2, Double price);
 	
 	public List<Article> findAll(Sort sort);
+	public List<Article> findAllByOrderByCategoryIdDesc();
 }
