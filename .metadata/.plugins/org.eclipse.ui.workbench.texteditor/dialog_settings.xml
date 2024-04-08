@@ -6,7 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
+		<item key="selection" value="run"/>
 		<list key="findhistory">
+			<item value="run"/>
 			<item value="delete"/>
 		</list>
 		<list key="replacehistory">

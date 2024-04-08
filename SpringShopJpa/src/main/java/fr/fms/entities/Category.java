@@ -1,4 +1,4 @@
-package fr.fms.entities;
+ package fr.fms.entities;
 
 import java.util.Collection;
 import javax.persistence.Entity;

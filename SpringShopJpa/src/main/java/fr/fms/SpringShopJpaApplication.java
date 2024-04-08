@@ -27,6 +27,7 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
+		/*
 		Category smartphone = categoryRepository.save(new Category("smartphone"));
 		Category tablet = categoryRepository.save(new Category("tablet"));
 		Category pc = categoryRepository.save(new Category("pc"));
@@ -42,7 +43,9 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 		articleRepository.save(new Article("Honor 12X", "Huaway", 389, smartphone));
 		articleRepository.save(new Article("Bureau 2024", "Acer", 390, pc));
 		articleRepository.save(new Article("Transformer T350", "Asus", 290, pc));
-
+		*/
+		updateArticle(10);
+		/*
 		int choise;
 		do {
 			choise = lookInstructions(scn);
@@ -68,6 +71,7 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 				System.out.println("Cette option n'existe pas");
 			}
 		}while (choise != 0);
+		*/
 		
 	}
 	//exercice 1.2
@@ -103,8 +107,13 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 		articleRepository.deleteById((long) id);
 	}
 	
-	public void updateArticle(Long id) {
-		System.out.println("Acticle actuel: "+articleRepository.findById((long) id));
+	public void updateArticle(long i) {
+		Article article = articleRepository.findById((long) i).get();
+		article.setBrand("Spirit of gamer");
+		article.setDescription("Clavier");
+		article.setPrice(44.90);
+		articleRepository.save(article);
+		/*
 		System.out.println("Nouvelle description");
 		String description = scn.nextLine();
 		System.out.println("Nouvelle marque");
@@ -112,6 +121,7 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 		System.out.println("Nouveau prix");
 		Double price = scn.nextDouble();
 		articleRepository.updateArticle(id, description, brand, price);
+		*/
 	}
 	
 	public void articlesByCategoryAsc() {
@@ -172,5 +182,5 @@ public class SpringShopJpaApplication implements CommandLineRunner{
 			}
 		};
 		return -1;
-	}
+	} 
 }
