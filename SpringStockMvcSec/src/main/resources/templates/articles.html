@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>C'est l'heure du café</title>
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}">
+</head>
+<body>
+<!-- L'affichage est un peu différent de la master class car j'utilise bootswatch -->
+<div class="container">
+	<div class="panel panel-primary">
+		<div class="panel-heading">Liste des articles</div>
+		<div class="panel-body">
+			<table class="table">
+				<tr>
+					<th>Id</th><th>Description</th><th>Prix</th>
+				</tr>
+				<tr th:each="a:${listArticle}">
+					<td th:text="${a.id}"></td>
+					<td th:text="${a.description}"></td>
+					<td th:text="${a.price}"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<ul class="nav nav-pills">
+		<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
+			<a th:href="@{/index(page=${status.index})}" th:text="${status.index}"></a>
+		</li>
+	</ul>
+</div>
+</body>
+</html>
