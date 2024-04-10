@@ -10,25 +10,34 @@
 <!-- L'affichage est un peu différent de la master class car j'utilise bootswatch -->
 <div class="container">
 	<div class="panel panel-primary">
-		<div class="panel-heading">Liste des articles</div>
+		<div class="panel-heading">Liste des cafés</div>
+		<div class="panel-body">
+			<form th:action="@{/index}" method="get">
+				<label>Mot clé</label>
+				<input type="text" name="keyword" th:value="${keyword}">
+				<button type="submit" class="btn btn-primary">Chercher</button>
+			</form>
+		</div>
 		<div class="panel-body">
 			<table class="table">
 				<tr>
-					<th>Id</th><th>Description</th><th>Prix</th>
+					<th>Id</th><th>Description</th><th>Prix</th><th>Effacer</th>
 				</tr>
 				<tr th:each="a:${listArticle}">
 					<td th:text="${a.id}"></td>
 					<td th:text="${a.description}"></td>
 					<td th:text="${a.price}"></td>
+					<td><a th:href="@{/delete(id=${a.id}, page=${currentPage}, keyword=${keyword})}"><button class="btn btn-banger">Supprimer</button></a></td>
 				</tr>
 			</table>
+
+			<ul class="nav nav-pills">
+				<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
+					<a th:href="@{/index(page=${status.index},keyword=${keyword})}" th:text="${status.index}"></a>
+				</li>
+			</ul>
 		</div>
 	</div>
-	<ul class="nav nav-pills">
-		<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
-			<a th:href="@{/index(page=${status.index})}" th:text="${status.index}"></a>
-		</li>
-	</ul>
 </div>
 </body>
 </html>

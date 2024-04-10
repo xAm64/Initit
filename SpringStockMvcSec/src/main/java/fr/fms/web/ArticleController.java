@@ -19,11 +19,18 @@ public class ArticleController {
 	
 	//@RequestMapping(value="/index" , method=RequestMethod.GET)
 	@GetMapping("/index")
-	public String index(Model model, @RequestParam(name="page", defaultValue = "0") int page) {
+	public String index(Model model, @RequestParam(name="page", defaultValue = "0") int page, @RequestParam(name="keyword", defaultValue = "") String kw) {
 		Page<Article> articles = articleRepository.findAll(PageRequest.of(page,5));
 		model.addAttribute("listArticle", articles.getContent());
 		model.addAttribute("pages", new int[articles.getTotalPages()]);
 		model.addAttribute("currentPage", page);
+		model.addAttribute("keyword", kw);
 		return "articles";
+	}
+
+	@GetMapping("/delete")
+	public String delete(Long id, int page, String keyword){
+		articleRepository.deleteById(id);
+		return "redirect:/index?page="+page+"&keyword="+keyword;
 	}
 }
