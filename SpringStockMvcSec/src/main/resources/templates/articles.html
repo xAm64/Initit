@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,34 +8,34 @@
 </head>
 <body>
 <!-- L'affichage est un peu différent de la master class car j'utilise bootswatch -->
-<div class="container">
-	<div class="panel panel-primary">
-		<div class="panel-heading">Liste des cafés</div>
-		<div class="panel-body">
-			<form th:action="@{/index}" method="get">
-				<label>Mot clé</label>
-				<input type="text" name="keyword" th:value="${keyword}">
-				<button type="submit" class="btn btn-primary">Chercher</button>
-			</form>
-		</div>
-		<div class="panel-body">
-			<table class="table">
-				<tr>
-					<th>Id</th><th>Description</th><th>Prix</th><th>Effacer</th>
-				</tr>
-				<tr th:each="a:${listArticle}">
-					<td th:text="${a.id}"></td>
-					<td th:text="${a.description}"></td>
-					<td th:text="${a.price}"></td>
-					<td><a th:href="@{/delete(id=${a.id}, page=${currentPage}, keyword=${keyword})}"><button class="btn btn-banger">Supprimer</button></a></td>
-				</tr>
-			</table>
+<div layout:fragment="content">
+	<div class="container">
+		<div class="panel panel-primary">
+			<div class="panel-heading">Liste des cafés</div>
+			<div class="panel-body">
+				<form th:action="@{/index}" method="get">
+					<label>Trouver un café</label>
+					<input type="text" name="keyword" th:value="${keyword}">
+					<button type="submit" class="btn btn-primary">Chercher</button>
+				</form>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tr>
+						<th>Id</th><th>Description</th><th>Prix</th><th>Effacer</th>
+					</tr>
+					<tr th:each="a:${listArticle}">
+						<td th:text="${a.id}"></td>
+						<td th:text="${a.description}"></td>
+						<td th:text="${a.price}"></td>
+						<td><a th:href="@{/delete(id=${a.id}, page=${currentPage}, keyword=${keyword})}"><button class="btn btn-danger">Supprimer</button></a></td>
+					</tr>
+				</table>
 
-			<ul class="nav nav-pills">
-				<li th:class="${currentPage==status.index}?'active':''" th:each="page,status:${pages}">
-					<a th:href="@{/index(page=${status.index},keyword=${keyword})}" th:text="${status.index}"></a>
-				</li>
-			</ul>
+				<ul class="navbar-nav">
+					<li th:class="${currentPage==status.index}?'nav-item active':'nav-item'" th:each="page,status:${pages}"><button class="btn"></button><a th:href="@{/index(page=${status.index},keyword=${keyword})}" th:text="${status.index}"></a></button></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>

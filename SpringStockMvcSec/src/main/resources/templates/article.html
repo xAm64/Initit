@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter un nouveau café</title>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="col-md-4 col-xs-8">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Saisir le nouveau café</div>
+                <div class="panel-body">
+                    <form th:action="@{/save}" method="post">
+                        <div class="form-group">
+                            <label class="control-label">Nom du café</label>
+                            <input class="form-control" type="text" name="description" th:value="${article.description}">
+                            <span th:errors="${article.description}"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Prix</label>
+                            <input class="form-control" type="text" name="price" th:value="${article.price}">
+                            <span th:errors="${article.price}"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
